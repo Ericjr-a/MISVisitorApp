@@ -25,13 +25,115 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('[Visitor.js] Modal initial display style:', visitorModal.style.display);
   }
 
-  let visitors = [];
+  let allVisitors = []; // Store all visitors for client-side filtering
   let page = 1;
   const pageSize = 10;
   let editMode = false;
   let editingId = null;
+  let currentSearchTerm = ''; // Store current search term
+  let dateRangeStart = null;
+  let dateRangeEnd = null;
 
   function getToken() { return localStorage.getItem('vra_token'); }
+
+  // Helper function to format date for searching
+  function formatDateForSearch(dateString) {
+    if (!dateString) return '';
+    const d = new Date(dateString);
+    if (isNaN(d.getTime())) return dateString;
+    return d.toLocaleString().toLowerCase();
+  }
+
+  // Helper function to format time for display
+  function formatDateTime(ts) {
+    if (!ts) return '';
+    const d = new Date(ts);
+    if (isNaN(d.getTime())) return ts;
+    return d.toLocaleString();
+  }
+
+  // Enhanced search function - searches across ALL fields
+  function searchVisitors(searchTerm) {
+    if (!searchTerm || searchTerm.trim() === '') {
+      // No search term, return all visitors
+      return [...allVisitors];
+    }
+
+    const term = searchTerm.toLowerCase().trim(); 
+    
+    return allVisitors.filter(visitor => {
+      // Build searchable fields
+      const visitorName = `${visitor.guest_firstname || ''} ${visitor.guest_lastname || ''}`.toLowerCase();
+      const badgeNumber = (visitor.badge_number || '').toLowerCase();
+      const checkInTime = formatDateForSearch(visitor.check_in_time);
+      const checkOutTime = formatDateForSearch(visitor.check_out_time);
+      const visitPurpose = (visitor.visit_purpose || '').toLowerCase();
+      const hostName = (visitor.host_name || '').toLowerCase();
+      
+      // Search across all fields
+      return (
+        visitorName.includes(term) ||
+        badgeNumber.includes(term) ||
+        checkInTime.includes(term) ||
+        checkOutTime.includes(term) ||
+        visitPurpose.includes(term) ||
+        hostName.includes(term)
+      );
+    });
+  }
+
+  // Apply date range filter
+  function filterByDateRange(visitors) {
+    if (!dateRangeStart && !dateRangeEnd) {
+      return visitors;
+    }
+    
+    return visitors.filter(visitor => {
+      const checkInDate = new Date(visitor.check_in_time);
+      if (dateRangeStart && checkInDate < dateRangeStart) return false;
+      if (dateRangeEnd && checkInDate > dateRangeEnd) return false;
+      return true;
+    });
+  }
+
+  // Update the table with all filters applied
+  function updateTableWithFilters() {
+    // First apply search filter
+    let filteredVisitors = searchVisitors(currentSearchTerm);
+    // Then apply date range filter
+    filteredVisitors = filterByDateRange(filteredVisitors);
+    
+    // Update pagination based on filtered results
+    const totalFiltered = filteredVisitors.length;
+    const totalPages = Math.ceil(totalFiltered / pageSize);
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const paginatedVisitors = filteredVisitors.slice(startIndex, endIndex);
+    
+    renderTable(paginatedVisitors);
+    renderPagination(totalFiltered, page, totalPages);
+    
+    // Update search results counter
+    updateSearchResultsCount(totalFiltered, allVisitors.length);
+  }
+
+  // Update search results counter
+  function updateSearchResultsCount(filteredCount, totalCount) {
+    const counterElement = document.getElementById('searchResultsCount');
+    if (counterElement) {
+      if (currentSearchTerm && currentSearchTerm.trim() !== '') {
+        if (dateRangeStart || dateRangeEnd) {
+          counterElement.textContent = `Showing ${filteredCount} of ${totalCount} visitors (search: "${currentSearchTerm}" + date filter)`;
+        } else {
+          counterElement.textContent = `Showing ${filteredCount} of ${totalCount} visitors (search: "${currentSearchTerm}")`;
+        }
+      } else if (dateRangeStart || dateRangeEnd) {
+        counterElement.textContent = `Showing ${filteredCount} of ${totalCount} visitors (date filtered)`;
+      } else {
+        counterElement.textContent = `Total: ${totalCount} visitors`;
+      }
+    }
+  }
 
   function renderTable(data) {
     if (!tableBody) return;
@@ -39,15 +141,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const role = getRole();
 
+    if (!data || data.length === 0) {
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="7" style="text-align: center; padding: 40px;">
+            <i class="fa-solid fa-search" style="font-size: 48px; color: #ccc;"></i>
+            <p style="margin-top: 10px; color: #666;">
+              ${currentSearchTerm ? 'No visitors match your search.' : 'No visitors found.'}
+            </p>
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
     data.forEach(v => {
       const tr = document.createElement('tr');
-      const fmt = (ts) => {
-        if (!ts) return '';
-        const d = new Date(ts);
-        if (isNaN(d.getTime())) return ts;
-        return d.toLocaleString();
-      };
-
+      
       const editedBadge = v.is_edited
         ? `<span class="badge-pill" style="margin-left:8px;">Edited</span>`
         : '';
@@ -63,13 +173,17 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
       }
 
+      const checkOutDisplay = v.check_out_time 
+        ? formatDateTime(v.check_out_time)
+        : '<span class="badge badge-warning" style="background-color: #f39c12; color: white; padding: 4px 8px; border-radius: 4px;">Active</span>';
+
       tr.innerHTML = `
-        <td>${v.guest_firstname} ${v.guest_lastname}${editedBadge}</td>
-        <td><span class="badge-pill">${v.badge_number || '-'}</span></td>
-        <td>${fmt(v.check_in_time) || ''}</td>
-        <td>${fmt(v.check_out_time) || ''}</td>
-        <td>${v.visit_purpose || ''}</td>
-        <td>${v.host_name || ''}</td>
+        <td><strong>${v.guest_firstname} ${v.guest_lastname}</strong>${editedBadge}</td>
+        <td><span class="badge-pill" style="background-color: #3498db; color: white; padding: 4px 8px; border-radius: 4px;">${v.badge_number || '-'}</span></td>
+        <td>${formatDateTime(v.check_in_time) || '-'}</td>
+        <td>${checkOutDisplay}</td>
+        <td>${v.visit_purpose || '-'}</td>
+        <td>${v.host_name || '-'}</td>
         <td class="action-icons">
           ${actions}
         </td>
@@ -78,33 +192,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function renderPagination(total, currentPage, totalPages) {
+  function renderPagination(totalItems, currentPage, totalPages) {
     let paginationContainer = document.querySelector('.pagination-controls');
     if (!paginationContainer) {
       paginationContainer = document.createElement('div');
       paginationContainer.className = 'pagination-controls';
       paginationContainer.style.display = 'flex';
       paginationContainer.style.justifyContent = 'center';
+      paginationContainer.style.alignItems = 'center';
       paginationContainer.style.gap = '10px';
       paginationContainer.style.marginTop = '20px';
+      paginationContainer.style.padding = '10px';
       document.querySelector('.visitor-log-card').appendChild(paginationContainer);
     }
 
     paginationContainer.innerHTML = `
-      <button id="prevPage" class="btn-secondary" ${currentPage === 1 ? 'disabled' : ''}>Previous</button>
-      <span>Page ${currentPage} of ${totalPages}</span>
-      <button id="nextPage" class="btn-secondary" ${currentPage === totalPages ? 'disabled' : ''}>Next</button>
+      <button id="prevPage" class="btn-secondary" ${currentPage === 1 ? 'disabled' : ''} style="padding: 8px 16px; cursor: pointer;">← Previous</button>
+      <span style="margin: 0 15px;">Page ${currentPage} of ${totalPages} (${totalItems} items)</span>
+      <button id="nextPage" class="btn-secondary" ${currentPage === totalPages ? 'disabled' : ''} style="padding: 8px 16px; cursor: pointer;">Next →</button>
     `;
 
-    document.getElementById('prevPage').onclick = () => {
-      if (page > 1) { page--; fetchVisitors(); }
-    };
-    document.getElementById('nextPage').onclick = () => {
-      if (page < totalPages) { page++; fetchVisitors(); }
-    };
+    const prevBtn = document.getElementById('prevPage');
+    const nextBtn = document.getElementById('nextPage');
+    
+    if (prevBtn) {
+      prevBtn.onclick = () => {
+        if (page > 1) { 
+          page--; 
+          updateTableWithFilters();
+        }
+      };
+    }
+    
+    if (nextBtn) {
+      nextBtn.onclick = () => {
+        const filteredCount = filterByDateRange(searchVisitors(currentSearchTerm)).length;
+        const maxPage = Math.ceil(filteredCount / pageSize);
+        if (page < maxPage) { 
+          page++; 
+          updateTableWithFilters();
+        }
+      };
+    }
   }
 
-  // Debounce utility
+  // Debounce utility for search
   function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -117,8 +249,32 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  async function fetchVisitors(search = '') {
-    // Start by checking if we are on a page with a visitor table
+  // Initialize date range picker
+  function initDateRangePicker() {
+    const dateInput = document.getElementById('date-range-picker');
+    if (dateInput && typeof flatpickr !== 'undefined') {
+      flatpickr(dateInput, {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        onChange: function(selectedDates) {
+          if (selectedDates.length === 2) {
+            dateRangeStart = selectedDates[0];
+            dateRangeEnd = selectedDates[1];
+            // Reset to page 1 when applying date filter
+            page = 1;
+            updateTableWithFilters();
+          } else if (selectedDates.length === 0) {
+            dateRangeStart = null;
+            dateRangeEnd = null;
+            page = 1;
+            updateTableWithFilters();
+          }
+        }
+      });
+    }
+  }
+
+  async function fetchVisitors() {
     if (!tableBody) {
       console.log('[Visitor.js] No visitor table found, skipping fetch.');
       return;
@@ -131,12 +287,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      // Build URL with search param if present
-      let url = `${API_BASE}/api/visitors/get-visitors?page=${page}&limit=${pageSize}`;
-      if (search) {
-        url += `&search=${encodeURIComponent(search)}`;
-      }
-
+      // Fetch all visitors for client-side filtering
+      const url = `${API_BASE}/api/visitors/get-visitors?page=1&limit=1000`;
+      
       const res = await fetch(url, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -149,54 +302,85 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('[Visitor.js] Fetch response:', data);
 
       if (Array.isArray(data)) {
-        // Fallback for non-paginated response
-        console.warn('[Visitor.js] Received array response (backend might not be updated). Using client-side pagination.');
-        visitors = data;
-        renderTable(visitors.slice(0, pageSize)); // Show first page
-        // Optional: Render simple pagination or just all
+        allVisitors = data;
       } else {
-        // Paginated response
-        visitors = data.data || [];
-        renderTable(visitors);
-        renderPagination(data.total, data.page, data.pages);
+        allVisitors = data.data || [];
       }
+      
+      // Reset filters and apply
+      currentSearchTerm = '';
+      dateRangeStart = null;
+      dateRangeEnd = null;
+      page = 1;
+      
+      // Clear search input
+      if (globalSearch) {
+        globalSearch.value = '';
+      }
+      
+      updateTableWithFilters();
+      
     } catch (err) {
       console.error('Error fetching visitors', err);
     }
   }
 
-  // No host select: users will type the person visited into `host_name`.
-
-  // Only attach global search if we are on the visitor page (tableBody exists)
-  if (globalSearch && tableBody) {
-    globalSearch.addEventListener('input', debounce((e) => {
-      // Reset to page 1 for new searches
-      page = 1;
-      fetchVisitors(e.target.value);
-    }, 500));
-
-    // Allow immediate search on Enter
-    globalSearch.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
+  // Initialize search functionality
+  function initSearch() {
+    if (globalSearch && tableBody) {
+      // Update placeholder text to reflect multi-field search
+      globalSearch.placeholder = "Search by name, badge, time, purpose, host...";
+      
+      globalSearch.addEventListener('input', debounce((e) => {
+        // Reset to page 1 for new searches
         page = 1;
-        fetchVisitors(e.target.value);
-      }
-    });
+        currentSearchTerm = e.target.value;
+        updateTableWithFilters();
+      }, 400));
+    }
   }
 
+  // Export functionality
   exportBtn?.addEventListener('click', () => {
-    if (!visitors || visitors.length === 0) return showAppAlert('No logs to export');
-    // build CSV
-    const rows = [['Name', 'Check-in', 'Check-out', 'Purpose', 'Host']];
-    visitors.forEach(v => rows.push([`${v.guest_firstname} ${v.guest_lastname}`, v.check_in_time || '', v.check_out_time || '', v.visit_purpose || '', v.host_name || '']));
+    // Get filtered data for export
+    let dataToExport = searchVisitors(currentSearchTerm);
+    dataToExport = filterByDateRange(dataToExport);
+    
+    if (!dataToExport || dataToExport.length === 0) {
+      alert('No logs to export');
+      return;
+    }
+    
+    // Build CSV with all fields
+    const rows = [
+      ['Visitor Name', 'Badge Number', 'Check-in Time', 'Check-out Time', 'Purpose', 'Host', 'Phone Number']
+    ];
+    
+    dataToExport.forEach(v => {
+      rows.push([
+        `${v.guest_firstname} ${v.guest_lastname}`,
+        v.badge_number || '',
+        formatDateTime(v.check_in_time) || '',
+        formatDateTime(v.check_out_time) || '',
+        v.visit_purpose || '',
+        v.host_name || '',
+        v.guest_phonenumber || ''
+      ]);
+    });
+    
     const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url; a.download = 'visitor_logs.csv';
-    document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    a.href = url;
+    a.download = `visitor_logs_${new Date().toISOString().slice(0, 19).replace(/:/g, '-')}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
   });
 
+  // All your existing event listeners (view, edit, delete) remain unchanged
   tableBody?.addEventListener('click', async (e) => {
     const deleteBtn = e.target.closest('.delete');
     const viewBtn = e.target.closest('.view');
@@ -211,7 +395,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const res = await fetch(`${API_BASE}/api/visitors/${id}`, { headers: { 'Authorization': `Bearer ${token}` } });
         if (!res.ok) return alert('Failed to load visitor');
         const data = await res.json();
-        // populate form for viewing (readonly)
         document.getElementById('guest_firstname').value = data.guest_firstname || '';
         document.getElementById('guest_lastname').value = data.guest_lastname || '';
         document.getElementById('guest_phonenumber').value = data.guest_phonenumber || '';
@@ -231,10 +414,8 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
 
-        // set inputs readonly
         if (visitorForm) {
           visitorForm.querySelectorAll('input, select, textarea').forEach(i => i.disabled = true);
-          // hide submit
           const submit = visitorForm.querySelector('button[type="submit"]');
           if (submit) submit.style.display = 'none';
         }
@@ -254,7 +435,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await res.json();
         await loadHosts();
 
-        // populate form for editing
         document.getElementById('guest_firstname').value = data.guest_firstname || '';
         document.getElementById('guest_lastname').value = data.guest_lastname || '';
         document.getElementById('guest_phonenumber').value = data.guest_phonenumber || '';
@@ -274,10 +454,8 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
 
-        // enable inputs
         if (visitorForm) {
           visitorForm.querySelectorAll('input, select, textarea').forEach(i => i.disabled = false);
-          // show submit
           const submit = visitorForm.querySelector('button[type="submit"]');
           if (submit) submit.style.display = '';
         }
@@ -286,6 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) { console.error(err); alert('Failed to load visitor'); }
       return;
     }
+    
     if (deleteBtn) {
       e.preventDefault();
 
@@ -313,26 +492,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Initial load inside an async IIFE to handle token checks and data fetching properly.
+  // Initial load
   (async () => {
     const token = getToken();
     if (!tableBody) {
-      // No visitor table on this page (e.g., dashboard); skip fetch/render but keep modal behavior.
-      // Temporarily remove disabled to test modal
-      // if (!token && openVisitorModalBtn) openVisitorModalBtn.disabled = true;
+      // No visitor table on this page
     } else {
       if (!token) {
-        tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;">You are not logged in. Please log in to view visitor logs.</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;">You are not logged in. Please log in to view visitor logs.</td></tr>';
       } else {
         await fetchVisitors();
+        initSearch();
+        initDateRangePicker();
       }
     }
 
-    // Always load hosts if token is present, as it\'s needed for the modal (which is on all pages)
     if (token) {
       await loadHosts();
     }
-    // Ensure button is enabled for testing
+    
     if (openVisitorModalBtn) {
       openVisitorModalBtn.disabled = false;
       console.log('[Visitor.js] Button disabled status after init:', openVisitorModalBtn.disabled);
@@ -342,25 +520,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // Modal open/close handlers
   openVisitorModalBtn?.addEventListener('click', (e) => {
     console.log('[Visitor.js] Open modal button clicked');
-    console.log('[Visitor.js] openVisitorModalBtn:', openVisitorModalBtn);
-    console.log('[Visitor.js] visitorModal inside handler:', visitorModal);
-    console.log('[Visitor.js] visitorModal type:', typeof visitorModal);
-
     e.preventDefault();
     editMode = false; editingId = null;
-    // enable inputs and show submit
     if (visitorForm) {
       visitorForm.querySelectorAll('input, select, textarea').forEach(i => i.disabled = false);
       const submitBtn = visitorForm.querySelector('button[type="submit"]');
       if (submitBtn) submitBtn.style.display = '';
     }
     if (visitorModal) {
-      console.log('[Visitor.js] Setting modal display to flex');
       visitorModal.style.display = 'flex';
-    } else {
-      console.error('[Visitor.js] Modal element not found! visitorModal is:', visitorModal);
     }
-    // prefill next badge number when opening modal
     (async () => {
       try {
         const token = getToken();
@@ -375,15 +544,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     })();
   });
+  
   closeVisitorModalBtn?.addEventListener('click', (e) => {
     console.log('[Visitor.js] Close modal button clicked');
     e.preventDefault();
     if (visitorModal) {
       visitorModal.style.display = 'none';
-      console.log('[Visitor.js] Modal display set to none');
     }
     editMode = false; editingId = null;
-    // ensure inputs enabled
     if (visitorForm) {
       visitorForm.querySelectorAll('input, select, textarea').forEach(i => i.disabled = false);
       const submitBtn2 = visitorForm.querySelector('button[type="submit"]');
@@ -401,7 +569,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!res.ok) return;
       const data = await res.json();
       console.log('[Visitor.js] loadHosts response:', data);
-
 
       if (Array.isArray(data)) {
         hostsList = data;
@@ -437,7 +604,7 @@ document.addEventListener('DOMContentLoaded', () => {
   visitorForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const token = getToken();
-    if (!token) return showAppshowToast('warning', 'You must be logged in to log a visitor');
+    if (!token) return showAppToast('warning', 'You must be logged in to log a visitor');
 
     const host_name_val = document.getElementById('host_name')?.value?.trim();
     let host_ID = null;
@@ -486,7 +653,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       if (editMode && editingId) {
-        // send update
         const res = await fetch(`${API_BASE}/api/visitors/${editingId}`, {
           method: 'PUT',
           headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -508,7 +674,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!res.ok) {
           const body = await res.text();
           console.error('Failed to create visitor', body);
-          return showAppAlert('Failed to log visitor: ' + (body || res.statusText));
+          return showAppToast('error', 'Failed to log visitor: ' + (body || res.statusText));
         }
         const body = await res.json();
         showAppToast('success', body.message || 'Visitor logged');
@@ -523,6 +689,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Load hosts on init
   loadHosts();
 });
