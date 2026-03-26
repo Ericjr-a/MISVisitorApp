@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook - VisitorFlow</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/visitor.css">
+    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <h3>VisiLog</h3>
+                </a>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="index.html"><i class="fa-solid fa-grip"></i><span>Dashboard</span></a></li>
+                        <li><a href="visitor.html"><i class="fa-solid fa-users"></i><span>Visitor Log</span></a></li>
+                        <li><a href="call-log.html"><i class="fa-solid fa-phone"></i><span>Call Log</span></a></li>
+                        <li><a href="checkIn.html"><i
+                                    class="fa-solid fa-arrow-right-to-bracket"></i><span>Check-In</span></a></li>
+                        <li><a href="checkOut.html"><i
+                                    class="fa-solid fa-arrow-right-from-bracket"></i><span>Check-Out</span></a></li>
+                        <li><a href="phonebook.html" class="active"><i
+                                    class="fa-solid fa-address-book"></i><span>Phonebook</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+            <nav class="sidebar-bottom-nav">
+                <ul>
+                    <li><a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
+                    <li><a href="report.html"><i class="fa-solid fa-file-lines"></i><span>Report</span></a></li>
+                    </li><a href="#" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i><span>Log
+                            Out</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-search">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="globalSearch" placeholder="Search...">
+                </div>
+                <div class="header-actions">
+                    <div class="profile-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </div>
+            </header>
+
+            <section class="content-section">
+                <div class="section-header">
+                    <h1>Phonebook</h1>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Telephone Directory</h2>
+                        <p style="margin-bottom: 1.5rem;">List of all contacts of staff</p>
+                    </div>
+                    <div class="card-content">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Avaya Directory</th>
+                                    <th>Contacts</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rows will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="main-footer">
+            <div class="footer-links">
+                <a href="#">Quick Links</a>
+                <a href="#">Company</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </footer>
+    </div>
+    <script src="../js/config.js"></script>
+    <script src="../js/auth-check.js"></script>
+    <script src="../js/V.Js"></script>
+    <script src="../js/visitor.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="/js/phonebook.js"></script>
+    <script src="../js/logout.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VisitorFlow - Reports</title>
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/report.css" />
+  <link rel="stylesheet" href="/css/custom-alert.css" />
+  <script src="../js/chart.min.js"></script>
+  <script src="../js/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <a href="index.html" class="logo">
+          <i class="fa-solid fa-layer-group"></i>
+          <h3>VisiLog</h3>
+        </a>
+        <nav class="sidebar-nav">
+          <ul>
+            <li><a href="index.html"><i class="fa-solid fa-grip"></i><span>Dashboard</span></a></li>
+            <li><a href="visitor.html"><i class="fa-solid fa-users"></i><span>Visitor Log</span></a></li>
+            <li><a href="call-log.html"><i class="fa-solid fa-phone"></i><span>Call Log</span></a></li>
+            <li><a href="checkIn.html"><i class="fa-solid fa-arrow-right-to-bracket"></i><span>Check-In</span></a></li>
+            <li><a href="checkOut.html"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Check-Out</span></a>
+            </li>
+            <li><a href="phonebook.html"><i class="fa-solid fa-address-book"></i><span>Phonebook</span></a></li>
+          </ul>
+        </nav>
+      </div>
+      <nav class="sidebar-bottom-nav">
+        <ul>
+          <li><a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
+          <li><a href="report.html" class="active"><i class="fa-solid fa-file-lines"></i><span>Report</span></a></li>
+          <li><a href="login.html"><i class="fa-solid fa-right-from-bracket"></i><span>Log Out</span></a></li>
+        </ul>
+      </nav>
+    </aside>
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+      </header>
+
+      <div id="customAlertContainer" class="custom-alert-container"></div>
+
+      <section class="content">
+        <h1>Reports</h1>
+
+        <div class="chart-controls">
+          <div class="data-type-filter">
+            <label for="dataType">Data Type:</label>
+            <select id="dataType">
+              <option value="visitors">Visitors</option>
+              <option value="calls">Calls</option>
+              <option value="both">Both</option>
+            </select>
+          </div>
+          <div class="date-filter">
+            <label for="fromDate">From:</label>
+            <input type="date" id="fromDate" value="2025-01-01">
+            <label for="toDate">To:</label>
+            <input type="date" id="toDate" value="2025-12-31">
+            <button id="updateReport" class="btn-primary">Update</button>
+            <button id="exportReport" class="btn-secondary"><i class="fa-solid fa-download"></i> Export</button>
+          </div>
+        </div>
+
+        <div class="summary-cards">
+          <div class="card summary-card">
+            <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+            <div class="card-info">
+              <h3>Total Visitors</h3>
+              <p id="totalVisitors">0</p>
+            </div>
+          </div>
+          <div class="card summary-card">
+            <div class="card-icon"><i class="fa-solid fa-phone"></i></div>
+            <div class="card-info">
+              <h3>Total Calls</h3>
+              <p id="totalCalls">0</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-container main-chart">
+            <h3>Visitor & Call Trends</h3>
+            <canvas id="visitorChart"></canvas>
+          </div>
+          <div class="chart-container secondary-chart">
+            <h3>Purpose of Visit</h3>
+            <canvas id="purposeChart"></canvas>
+          </div>
+          <div class="chart-container secondary-chart">
+            <h3>Top Hosts</h3>
+            <canvas id="hostChart"></canvas>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table id="reportTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Date</th>
+                <th>Purpose</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <!-- recent rows will be loaded here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="../js/config.js"></script>
+  <script src="../js/auth-check.js"></script>
+  <script src="../js/V.Js"></script>
+  <script src="../js/visitor.js"></script>
+  <script src="../js/dashboard.js"></script>
+  <script src="/js/report.js"></script>
+  <script src="../js/logout.js"></script>
+</body>
+
+</html>

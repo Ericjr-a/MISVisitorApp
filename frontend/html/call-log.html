@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call Log - VisitorFlow</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/visitor.css">
+    <link rel="stylesheet" href="/css/call-log.css">
+    <link rel="stylesheet" href="/css/modal.css">
+    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <h2>VisiLog</h2>
+                </a>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="index.html"><i class="fa-solid fa-grip"></i><span>Dashboard</span></a></li>
+                        <li><a href="visitor.html"><i class="fa-solid fa-users"></i><span>Visitor Log</span></a></li>
+                        <li><a href="call-log.html" class="active"><i class="fa-solid fa-phone"></i><span>Call
+                                    Log</span></a></li>
+                        <li><a href="checkIn.html"><i
+                                    class="fa-solid fa-arrow-right-to-bracket"></i><span>Check-In</span></a></li>
+                        <li><a href="checkOut.html"><i
+                                    class="fa-solid fa-arrow-right-from-bracket"></i><span>Check-Out</span></a></li>
+                        <li><a href="phonebook.html"><i class="fa-solid fa-address-book"></i><span>Phonebook</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <nav class="sidebar-bottom-nav">
+                <ul>
+                    <li><a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
+                    <li><a href="report.html"><i class="fa-solid fa-file-lines"></i><span>Report</span></a></li>
+                    </li><a href="#" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i><span>Log
+                            Out</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-search">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="globalSearch" placeholder="Search...">
+                </div>
+                <div class="header-actions">
+                    <div class="profile-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </div>
+            </header>
+
+            <section class="call-log-container">
+                <h1 class="call-log-title">Call Logs</h1>
+
+                <div class="log-filters">
+                    <div class="filter-group">
+                        <label for="start-date">Start Date</label>
+                        <div class="input-with-icon">
+                            <i class="fa-solid fa-calendar-day"></i>
+                            <input type="date" id="start-date">
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="end-date">End Date</label>
+                        <div class="input-with-icon">
+                            <i class="fa-solid fa-calendar-day"></i>
+                            <input type="date" id="end-date">
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="call-type">Call Type</label>
+                        <select id="call-type">
+                            <option value="all">All</option>
+                            <option value="incoming">Incoming</option>
+                            <option value="outgoing">Outgoing</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button id="openCallLogModal" class="btn-primary"><i class="fa-solid fa-plus"></i> Add New Call
+                            Log</button>
+                        <button id="exportCallsBtn" class="btn-secondary"><i class="fa-solid fa-download"></i> Export
+                            Call History</button>
+                    </div>
+                </div>
+
+                <div class="card call-log-card">
+                    <div class="call-card-header">
+                        <h2>Recent Call Records</h2>
+                        <p>A comprehensive list of all call records, sortable by various criteria.</p>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Caller Name</th>
+                                <th>Call Time</th>
+                                <th>Duration</th>
+                                <th>Type</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- dynamic rows inserted by calllog.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <footer class="main-footer">
+            <div class="footer-links">
+                <a href="#">Quick Links</a>
+                <a href="#">Company</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- New Call Log Modal -->
+    <div id="callLogModal" class="modal">
+        <div class="modal-content">
+            <h2>Log New Call</h2>
+            <p>Fields with * are mandatory.</p>
+
+            <form id="callLogForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="caller_firstname">Caller Firstname<span>*</span></label>
+                        <input id="caller_firstname" name="caller_firstname" type="text"
+                            placeholder="Enter caller's firstname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="caller_lastname">Caller Lastname<span>*</span></label>
+                        <input id="caller_lastname" name="caller_lastname" type="text"
+                            placeholder="Enter caller's lastname" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="host_select">Person Called<span>*</span></label>
+                    <input id="host_select" name="host_select" type="text" placeholder="Enter person called's name"
+                        list="hosts" required>
+                    <datalist id="hosts"></datalist>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Caller Contact<span>*</span></label>
+                    <input id="contact" name="contact" type="text" placeholder="Enter caller contact" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="call_purpose">Purpose / Notes<span>*</span></label>
+                    <textarea id="call_purpose" name="call_purpose" rows="3" placeholder="Enter purpose of the call"
+                        required></textarea>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="call_type">Call Type</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="call_type" value="incoming" checked>
+                            Incoming
+                        </label>
+                        <label>
+                            <input type="radio" name="call_type" value="outgoing"> Outgoing
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea rows="3" placeholder="Additional Notes"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="call_time">Call Time<span>*</span></label>
+                        <input id="call_time" name="call_time" type="datetime-local" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="call_duration">Duration (HH:MM)<span>*</span></label>
+                        <input id="call_duration" name="call_duration" type="text" placeholder="e.g., 00:05" required>
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button type="button" id="closeCallLogModal" class="cancel-btn">Cancel</button>
+                    <button type="submit" class="submit-btn">Log Call</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="../js/config.js"></script>
+    <script src="../js/auth-check.js"></script>
+    <script src="../js/V.Js"></script>
+    <script src="../js/visitor.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="/js/calllog.js"></script>
+    <script src="../js/logout.js"></script>
+</body>
+
+</html>

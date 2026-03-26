@@ -1,0 +1,217 @@
+ /* ----- Header Override ----- */
+.main-header.check-in-header {
+    justify-content: flex-end; /* Align items to the right */
+}
+
+.header-icon-btn {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    padding: 0.5rem;
+}
+
+/* ----- Main Page Titles ----- */
+.check-in-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.check-in-subtitle {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+/* ----- Check-In Card ----- */
+.check-in-card {
+    max-width: 800px; /* Constrain the width of the form */
+    margin: 0 auto; /* Center the form */
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .check-in-card {
+        max-width: 100%; /* Full width on smaller screens */
+        margin: 0 1rem; /* Add some margin on sides */
+    }
+}
+
+.check-in-card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.check-in-card .form-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+/* ----- Form Sections ----- */
+.form-section {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+}
+
+.form-section h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Search Container */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding-left: 0.75rem;
+    flex-grow: 1;
+}
+
+.search-bar i {
+    color: var(--text-light);
+}
+
+.search-bar input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    background: transparent;
+}
+
+/* Selected Visitor Box */
+.selected-visitor-box {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.selected-visitor-box .visitor-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.selected-visitor-box .last-visit {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+/* Form Grid for two columns */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background-color: var(--card-bg); /* Use card bg for light inputs */
+}
+
+/* New Visitor Button */
+.new-visitor-btn {
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.new-visitor-btn:hover {
+    background-color: #4f46e5;
+    border-color: #4f46e5;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding-top: 1.5rem;
+}
+
+/* Search Results Dropdown */
+.search-results-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+
+.result-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-item:hover {
+    background-color: #f5f7fa;
+}
+
+.result-item strong {
+    color: #333;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.result-item small {
+    color: #666;
+}
+
+/* Ensure search container has relative positioning */
+.search-container .search-bar {
+    position: relative;
+}

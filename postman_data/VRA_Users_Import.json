@@ -1,0 +1,148 @@
+{
+    "info": {
+        "name": "VRA Users Bulk Import",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Add User - Admin",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"username\": \"Admin User\",\n    \"email\": \"admin@vra.com\",\n    \"passwordd\": \"admin123\",\n    \"role_name\": \"admin\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/users/add",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "users",
+                        "add"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add User - Supervisor",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"username\": \"Supervisor User\",\n    \"email\": \"supervisor@vra.com\",\n    \"passwordd\": \"supervisor123\",\n    \"role_name\": \"supervisor\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/users/add",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "users",
+                        "add"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add User - Receptionist",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"username\": \"Receptionist User\",\n    \"email\": \"reception@vra.com\",\n    \"passwordd\": \"reception123\",\n    \"role_name\": \"receptionist\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/users/add",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "users",
+                        "add"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add User - John Doe",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"username\": \"John Doe\",\n    \"email\": \"john.doe@vra.com\",\n    \"passwordd\": \"password123\",\n    \"role_name\": \"receptionist\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/users/add",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "users",
+                        "add"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add User - Jane Smith",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"username\": \"Jane Smith\",\n    \"email\": \"jane.smith@vra.com\",\n    \"passwordd\": \"password123\",\n    \"role_name\": \"supervisor\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/users/add",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "users",
+                        "add"
+                    ]
+                }
+            }
+        }
+    ]
+}

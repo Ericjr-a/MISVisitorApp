@@ -1,0 +1,153 @@
+{
+    "info": {
+        "name": "VRA Visitors Bulk Import",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Add Visitor - John Doe visiting Kwame",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"guest_firstname\": \"John\",\n    \"guest_lastname\": \"Doe\",\n    \"guest_phonenumber\": \"0244000001\",\n    \"host_ID\": 1,\n    \"is_staff\": 1,\n    \"visit_purpose\": \"Official Meeting\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/api/visitors/new-visitor",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "api",
+                        "visitors",
+                        "new-visitor"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add Visitor - Jane Smith visiting Ama",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"guest_firstname\": \"Jane\",\n    \"guest_lastname\": \"Smith\",\n    \"guest_phonenumber\": \"0244000002\",\n    \"host_ID\": 2,\n    \"is_staff\": 1,\n    \"visit_purpose\": \"Interview\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/api/visitors/new-visitor",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "api",
+                        "visitors",
+                        "new-visitor"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add Visitor - Bob Brown visiting Contractor",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"guest_firstname\": \"Bob\",\n    \"guest_lastname\": \"Brown\",\n    \"guest_phonenumber\": \"0244000003\",\n    \"host_ID\": 1,\n    \"is_staff\": 0,\n    \"visit_purpose\": \"Site Inspection\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/api/visitors/new-visitor",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "api",
+                        "visitors",
+                        "new-visitor"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add Visitor - Alice Green visiting Kofi",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"guest_firstname\": \"Alice\",\n    \"guest_lastname\": \"Green\",\n    \"guest_phonenumber\": \"0244000004\",\n    \"host_ID\": 3,\n    \"is_staff\": 1,\n    \"visit_purpose\": \"Delivery\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/api/visitors/new-visitor",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "api",
+                        "visitors",
+                        "new-visitor"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add Visitor - Charlie Black visiting Security",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"guest_firstname\": \"Charlie\",\n    \"guest_lastname\": \"Black\",\n    \"guest_phonenumber\": \"0244000005\",\n    \"host_ID\": 2,\n    \"is_staff\": 0,\n    \"visit_purpose\": \"Personal\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/api/visitors/new-visitor",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "api",
+                        "visitors",
+                        "new-visitor"
+                    ]
+                }
+            }
+        }
+    ]
+}

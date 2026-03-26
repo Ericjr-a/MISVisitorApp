@@ -1,0 +1,381 @@
+/* ===== Modal Overlay ===== */
+.modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 1000;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5); /* dark overlay */
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+/* ===== Modal Box ===== */
+.modal-content {
+  background: white;
+  width: 600px;
+  max-width: 90%;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+/* Change Password Modal - Increased Height */
+#changePasswordModal .modal-content {
+  min-height: 450px;
+  padding: 2.5rem;
+}
+
+#changePasswordModal .form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* Forgot Password Modal - Increased Height and Spacing */
+#forgotPasswordModal .modal-content {
+  min-height: 500px;
+  padding: 3rem;
+  width: 550px;
+}
+
+#forgotPasswordModal p {
+  margin-bottom: 5rem;
+}
+
+#forgotPasswordModal .button-group {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#forgotPasswordModal .send-email-btn {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* ===== Form Styling ===== */
+h2 {
+  font-size: 1.5rem;
+  color: #1F2937;
+}
+
+#forgotPasswordModal h2 {
+  font-size: 1.8rem;
+}
+
+p {
+  font-size: 0.9rem;
+  color: #6B7280;
+  margin-bottom: 1rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-group {
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.3rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="time"],
+input[type="file"],
+input[type="password"],
+textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #6366F1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+}
+
+/* Password Input Wrapper */
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-input-wrapper input {
+  padding-right: 2.5rem;
+}
+
+.password-input-wrapper .toggle-password {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9CA3AF;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+  user-select: none;
+}
+
+.password-input-wrapper .toggle-password:hover {
+  color: #6B7280;
+}
+
+span.readonly {
+  background: #EEF2FF;
+  color: #6366F1;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+/* ===== Buttons ===== */
+.btn-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cancel-btn {
+  background: #E5E7EB;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.submit-btn {
+  background: #6366F1;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #4f46e5;
+}
+
+.cancel-btn:hover {
+  background: #d1d5db;
+}
+
+/* Profile Upload Section */
+.profile-upload-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.profile-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #F3F4F6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #9CA3AF;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-photo-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #D1D5DB;
+  background: white;
+  color: #374151;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.upload-photo-btn:hover {
+  background: #F9FAFB;
+  border-color: #9CA3AF;
+}
+
+/* User & Role Management Modal */
+.user-role-modal {
+  width: 700px;
+  max-width: 95%;
+}
+
+.modal-header-with-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.modal-header-with-action h2 {
+  margin-bottom: 0.25rem;
+}
+
+.modal-header-with-action p {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.new-user-btn {
+  background: #6366F1;
+  color: white;
+  border: none;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.3s ease;
+  white-space: nowrap;
+  min-width: auto;
+}
+
+.new-user-btn:hover {
+  background: #4f46e5;
+}
+
+.user-account-section h3 {
+  font-size: 1.1rem;
+  color: #1F2937;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* User Table Styles */
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.user-table thead {
+  background: #F9FAFB;
+}
+
+.user-table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: #6B7280;
+  font-size: 0.875rem;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.user-table tbody tr {
+  border-bottom: 1px solid #F3F4F6;
+  transition: background-color 0.2s ease;
+}
+
+.user-table tbody tr:hover {
+  background-color: #F9FAFB;
+}
+
+.user-table td {
+  padding: 1rem;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+ }
+
+.status-badge.active {
+  background: #D1FAE5;
+  color: #065F46;
+}
+
+.status-badge.inactive {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+.action-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.action-icons i {
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+.edit-icon {
+  color: var(--text-light);
+}
+.edit-icon:hover {
+  color: var(--primary-color);
+}
+.delete-icon {
+  color: var(--text-light);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-10px);}
+  to {opacity: 1; transform: translateY(0);}
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fingerprint Enrollment</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/modal.css" />
+</head>
+
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <a href="index.html" class="logo">
+        <h2>VisiLog</h2>
+      </a>
+    </aside>
+
+    <main class="main-content">
+      <header class="main-header">
+        <h1>Fingerprint Enrollment</h1>
+      </header>
+
+      <section class="card">
+        <h2>Enroll Fingerprint</h2>
+        <p>This demo stores a fingerprint template (base64 or string). Replace with SDK integration for real scanners.
+        </p>
+        <div class="form-group">
+          <label>Guest ID</label>
+          <input id="guestId" type="number" placeholder="Guest ID" />
+        </div>
+        <div class="form-group">
+          <label>Fingerprint Template</label>
+          <textarea id="fpTemplate" rows="6" placeholder="Paste fingerprint template or base64"></textarea>
+        </div>
+        <div class="btn-row">
+          <button id="enrollBtn" class="btn-primary">Enroll</button>
+          <button id="matchBtn" class="btn-secondary">Match</button>
+        </div>
+        <div id="result" style="margin-top:12px;color:#333"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/auth-check.js"></script>
+  <script src="../js/V.Js"></script>
+  <script src="../js/visitor.js"></script>
+  <script src="../js/dashboard.js"></script>
+  <script src="../js/logout.js"></script>
+</body>
+
+</html>

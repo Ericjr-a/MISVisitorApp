@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-Out - VisitorFlow</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/visitor.css">
+    <link rel="stylesheet" href="/css/checkIn.css">
+    <link rel="stylesheet" href="/css/checkOut.css">
+    <link rel="stylesheet" href="/css/modal.css">
+    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <h2>VisiLog</h2>
+                </a>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="index.html"><i class="fa-solid fa-grip"></i><span>Dashboard</span></a></li>
+                        <li><a href="visitor.html"><i class="fa-solid fa-users"></i><span>Visitor Log</span></a></li>
+                        <li><a href="call-log.html"><i class="fa-solid fa-phone"></i><span>Call Log</span></a></li>
+                        <li><a href="checkIn.html"><i
+                                    class="fa-solid fa-arrow-right-to-bracket"></i><span>Check-In</span></a></li>
+                        <li><a href="checkOut.html" class="active"><i
+                                    class="fa-solid fa-arrow-right-from-bracket"></i><span>Check-Out</span></a></li>
+                        <li><a href="phonebook.html"><i class="fa-solid fa-address-book"></i><span>Phonebook</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <nav class="sidebar-bottom-nav">
+                <ul>
+                    <li><a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
+                    <li><a href="report.html"><i class="fa-solid fa-file-lines"></i><span>Report</span></a></li>
+                    </li><a href="#" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i><span>Log
+                            Out</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header check-in-header">
+                <div class="header-actions">
+                    <div class="profile-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </div>
+            </header>
+
+            <section class="check-out-container">
+                <h1 class="check-out-title">Visitor Check-Out</h1>
+
+                <div class="card check-out-card">
+                    <h2>Complete Visitor Departure</h2>
+                    <p class="form-subtitle">Record the departure details for a visitor.</p>
+
+                    <div class="form-section search-section">
+                        <h3>Search Visitor</h3>
+                        <div class="search-bar">
+                            <input type="text" id="visitorSearchCheckout"
+                                placeholder="Enter visitor name or phone number" list="visitorsCheckout">
+                            <datalist id="visitorsCheckout"></datalist>
+                            <div id="checkoutResults" class="results-list"
+                                style="display:none; position: absolute; background: #fff; border: 1px solid #ddd; max-height: 220px; overflow:auto; width: 100%; z-index: 50;">
+                            </div>
+                        </div>
+                        <button class="btn-primary select-visitor-btn">Select Visitor <i
+                                class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+
+                    <div class="selected-visitor-info">
+                        <h3 class="visitor-name">No visitor selected</h3>
+                        <p class="visitor-meta visitor-badge">Badge: -</p>
+                        <p class="visitor-meta visitor-phone">Phone: -</p>
+                        <p class="visitor-meta visitor-host">Host: -</p>
+                        <p class="visitor-meta visitor-purpose">Purpose: -</p>
+                        <p class="visitor-meta visitor-checkin"><i class="fa-regular fa-clock"></i> Checked In: -</p>
+                    </div>
+
+                    <div class="form-section departure-section">
+                        <div class="form-group full-width">
+                            <label for="departure-time">Departure Time</label>
+                            <input type="datetime-local" id="departure-time">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="notes">Notes / Feedback (Optional)</label>
+                            <textarea id="notes" rows="4"
+                                placeholder="Add any feedback or notes about the visit..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button id="cancelCheckoutBtn" class="btn-secondary">Cancel</button>
+                        <button id="confirmCheckoutBtn" class="btn-primary confirm-checkout-btn">Confirm
+                            Check-Out</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="main-footer">
+            <div class="footer-links">
+                <a href="#">Quick Links</a>
+                <a href="#">Support</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </footer>
+    </div>
+    <script src="../js/config.js"></script>
+    <script src="../js/auth-check.js"></script>
+    <script src="../js/V.Js"></script>
+    <script src="../js/visitor.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="/js/checkout.js"></script>
+    <script src="../js/logout.js"></script>
+</body>
+
+</html>

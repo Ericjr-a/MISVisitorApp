@@ -1,0 +1,78 @@
+.fingerprint-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.fingerprint-modal-content {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px;
+    background: #fff;
+    border-radius: 12px;
+}
+
+.fingerprint-modal-content h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.fingerprint-modal-content .subtitle {
+    color: #6b7280;
+    margin-bottom: 40px;
+}
+
+.scan-circle {
+    width: 320px;
+    height: 320px;
+    background: #e5eaff;
+    border-radius: 50%;
+    margin: 0 auto 40px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scan-circle i {
+    font-size: 160px;
+    color: #6b7280;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.fingerprint-modal-content .cancel-btn {
+    border: 1px solid #d1d5db;
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.checkin-btn {
+    background: #6366f1;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.fingerprint-modal-content .checkin-btn:hover {
+    background: #575ce4;
+}

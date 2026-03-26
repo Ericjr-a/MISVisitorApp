@@ -1,0 +1,37 @@
+{
+  "name": "mobile",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@react-native-community/datetimepicker": "8.4.4",
+    "@react-navigation/bottom-tabs": "^7.8.6",
+    "@react-navigation/drawer": "^7.7.5",
+    "@react-navigation/native": "^7.1.21",
+    "@react-navigation/native-stack": "^7.8.0",
+    "babel-preset-expo": "~54.0.0",
+    "expo-print": "~15.0.7",
+    "expo-secure-store": "^15.0.7",
+    "expo-sharing": "~14.0.7",
+    "expo-status-bar": "~3.0.8",
+    "lodash": "^4.17.21",
+    "react": "19.1.0",
+    "react-native": "0.81.5",
+    "react-native-chart-kit": "^6.12.0",
+    "react-native-gesture-handler": "~2.28.0",
+    "react-native-reanimated": "~4.1.1",
+    "react-native-safe-area-context": "^5.6.2",
+    "react-native-screens": "~4.16.0",
+    "react-native-svg": "15.12.1"
+  },
+  "private": true,
+  "devDependencies": {
+    "expo": "^54.0.25",
+    "wonka": "^6.3.5"
+  }
+}

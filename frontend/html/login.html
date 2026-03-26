@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="#" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="" />
+  <title>VRA Login - Volta River Authority</title>
+  <link rel="stylesheet" href="/css/login.css" />
+  <link rel="stylesheet" href="/css/fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="/css/modal.css" />
+</head>
+
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <div class="logo-section">
+        <img src="../images/vra-logo.png" alt="Volta River Authority Logo" class="logo" />
+        <h1>WELCOME</h1>
+        <p>Employee Portal Login</p>
+      </div>
+
+      <form class="login-form" id="loginForm">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" required />
+          <span class="error-message" id="emailError"></span>
+        </div>
+
+        <div class="form-group password-group">
+          <label for="password">Password</label>
+          <div class="password-input-wrap">
+            <input type="password" id="password" name="password" required />
+            <button type="button" class="toggle-password" data-target="password" aria-label="Show password">
+              <i class="fa-solid fa-eye-slash"></i>
+            </button>
+          </div>
+          <span class="error-message" id="passwordError"></span>
+        </div>
+
+        <div class="form-options">
+          <label class="checkbox-container">
+            <input type="checkbox" id="rememberMe" />
+            <span class="checkmark"></span>
+            Remember me
+          </label>
+          <a href="#" class="forgot-password" id="forgotPasswordLink">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="login-btn">
+          <span class="btn-text">Sign In</span>
+          <div class="loading-spinner" id="loadingSpinner"></div>
+        </button>
+      </form>
+
+      <div class="background-overlay"></div>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div id="forgotPasswordModal" class="modal">
+    <div class="modal-content">
+      <h2>Forgot Password</h2>
+      <p>Enter your email address to receive an OTP for password reset</p>
+
+      <form id="forgotPasswordForm">
+        <div class="form-group">
+          <label for="resetEmail">Email Address</label>
+          <input type="email" id="resetEmail" placeholder="Enter your email" required />
+        </div>
+
+        <button type="submit" class="submit-btn send-email-btn">
+          Send Email
+        </button>
+      </form>
+    </div>
+  </div>
+  <script src="../js/config.js"></script>
+
+
+  <script>
+    const token = localStorage.getItem("vra_token");
+    if (token) {
+      window.location.replace("/html/index.html");
+    }
+  </script>
+
+
+
+  <script type="module" src="../js/script.js"></script>
+</body>
+
+</html>

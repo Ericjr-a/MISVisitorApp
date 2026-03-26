@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-In - VisitorFlow</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/visitor.css">
+    <link rel="stylesheet" href="/css/checkIn.css">
+    <link rel="stylesheet" href="/css/modal.css">
+    <link rel="stylesheet" href="/css/fingerprint-modal.css"> <!-- New CSS for fingerprint modal -->
+    <link rel="stylesheet" href="/css/custom-alert.css">
+    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <h2>VisiLog</h2>
+                </a>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="index.html"><i class="fa-solid fa-grip"></i><span>Dashboard</span></a></li>
+                        <li><a href="visitor.html"><i class="fa-solid fa-users"></i><span>Visitor Log</span></a></li>
+                        <li><a href="call-log.html"><i class="fa-solid fa-phone"></i><span>Call Log</span></a></li>
+                        <li><a href="checkIn.html" class="active"><i
+                                    class="fa-solid fa-arrow-right-to-bracket"></i><span>Check-In</span></a></li>
+                        <li><a href="checkOut.html"><i
+                                    class="fa-solid fa-arrow-right-from-bracket"></i><span>Check-Out</span></a></li>
+                        <li><a href="phonebook.html"><i class="fa-solid fa-address-book"></i><span>Phonebook</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <nav class="sidebar-bottom-nav">
+                <ul>
+                    <li><a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
+                    <li><a href="report.html"><i class="fa-solid fa-file-lines"></i><span>Report</span></a></li>
+                    </li><a href="#" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i><span>Log
+                            Out</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header check-in-header">
+                <div class="header-actions">
+                    <div class="profile-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div id="customAlertContainer" class="custom-alert-container"></div>
+
+            <section class="check-in-container">
+                <h1 class="check-in-title">Visitor Check-In</h1>
+                <p class="check-in-subtitle">Quickly process visitor arrivals and assign badges.</p>
+
+                <div class="card check-in-card">
+                    <h2>Check-In Form</h2>
+                    <p class="form-subtitle">Enter visitor details, assign a badge, and log arrival time.</p>
+                    <div class="form-section">
+                        <h3>Visitor Details</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="guest_firstname">Firstname<span>*</span></label>
+                                <input id="checkin_guest_firstname" name="guest_firstname" type="text"
+                                    placeholder="Enter visitor's firstname" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="guest_lastname">Lastname<span>*</span></label>
+                                <input id="checkin_guest_lastname" name="guest_lastname" type="text"
+                                    placeholder="Enter visitor's lastname" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="guest_phonenumber">Phone Number</label>
+                            <input id="checkin_guest_phonenumber" name="guest_phonenumber" type="text"
+                                placeholder="Enter visitor's phone number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="host_name">Person Visited<span>*</span></label>
+                            <input id="checkin_host_name" name="host_name" type="text"
+                                placeholder="Enter person visited's name" list="hosts" required>
+                            <datalist id="hosts"></datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="visit_purpose">Purpose of visit<span>*</span></label>
+                            <input id="checkin_visit_purpose" name="visit_purpose" type="text"
+                                placeholder="Enter purpose of visit" required>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Badge & Arrival Details</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="badge_number">Badge Number <span class="readonly">Read-Only</span></label>
+                                <input id="checkin_badge_number" name="badge_number" type="text" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="arrival_time">Arrival Time<span>*</span></label>
+                                <input id="checkin_arrival_time" name="arrival_time" type="datetime-local" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn-secondary" id="thumbprintBtn"
+                            style="margin-right: auto; color: #7e92f6f5;"><i class="fa-solid fa-fingerprint"></i>
+                            Thumbprint</button>
+                        <button class="btn-secondary" id="cancelBtn">Cancel</button>
+                        <button class="btn-primary" id="checkinBtn">Check-In Visitor</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="main-footer">
+            <div class="footer-links">
+                <a href="#">Quick Links</a>
+                <a href="#">Support</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </footer>
+    </div>
+    <script src="../js/config.js"></script>
+    <script src="../js/V.Js"></script>
+    <script src="../js/visitor.js"></script>
+    <script src="../js/checkin.js"></script>
+
+    <!-- New Visitor Modal -->
+    <div id="visitorModal" class="modal">
+        <div class="modal-content">
+            <h2>Log New Visitor</h2>
+            <p>Fields with * are mandatory and badge number is auto generated</p>
+
+            <form id="visitorForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="guest_firstname">Firstname<span>*</span></label>
+                        <input id="guest_firstname" name="guest_firstname" type="text"
+                            placeholder="Enter visitor's firstname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guest_lastname">Lastname<span>*</span></label>
+                        <input id="guest_lastname" name="guest_lastname" type="text"
+                            placeholder="Enter visitor's lastname" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="guest_phonenumber">Phone Number</label>
+                    <input id="guest_phonenumber" name="guest_phonenumber" type="text"
+                        placeholder="Enter visitor's phone number">
+                </div>
+
+                <div class="form-group">
+                    <label for="host_name">Person Visited<span>*</span></label>
+                    <input id="host_name" name="host_name" type="text" placeholder="Enter person visited's name"
+                        list="hosts" required>
+                    <datalist id="hosts"></datalist>
+                </div>
+
+                <div class="form-group">
+                    <label for="visit_purpose">Purpose of visit<span>*</span></label>
+                    <input id="visit_purpose" name="visit_purpose" type="text" placeholder="Enter purpose of visit"
+                        required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="badge_number">Badge Number <span class="readonly">Read-Only</span></label>
+                        <input id="badge_number" name="badge_number" type="text" value="V007" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="arrival_time">Arrival Time<span>*</span></label>
+                        <input id="arrival_time" name="arrival_time" type="time" required>
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button type="button" id="closeVisitorModal" class="cancel-btn">Cancel</button>
+                    <button type="submit" class="submit-btn">Log and Check-In Visitor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Fingerprint Modal -->
+    <div id="fingerprintModal" class="fingerprint-modal">
+        <div class="fingerprint-modal-content">
+            <h2>Fingerprint</h2>
+            <p class="subtitle">Ask Visitor to place finger on the fingerprint reader</p>
+
+            <div class="scan-circle"><i class="fa-solid fa-fingerprint"></i></div>
+
+            <div class="buttons">
+                <button class="cancel-btn" id="cancelFingerprintBtn">Cancel</button>
+                <button class="checkin-btn" id="confirmFingerprintCheckinBtn">Save</button>
+            </div>
+        </div>
+    </div>
+    <script src="../js/config.js"></script>
+    <script src="../js/auth-check.js"></script>
+    <script src="../js/V.Js"></script>
+    <script src="../js/visitor.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/logout.js"></script>
+</body>
+
+</html>

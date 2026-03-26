@@ -1,0 +1,161 @@
+/* ----- Header Styles ----- */
+/* Overriding the header from style.css to match the new image */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-search {
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.header-search i {
+    margin-right: 0.5rem;
+}
+
+/* ----- Log Page Sub-header ----- */
+.log-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.log-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Re-usable button styles */
+.log-actions .btn-primary,
+.log-actions .btn-secondary {
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.log-actions .btn-secondary {
+    background-color: var(--card-bg);
+    color: var(--text-dark);
+    border: 1px solid var(--border-color);
+}
+
+.log-actions .btn-secondary:hover {
+    background-color: var(--bg-color);
+}
+
+.date-range {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+}
+
+.date-range i {
+    color: var(--text-light);
+}
+
+.date-range input {
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    width: 100px;
+    background: transparent;
+}
+
+.date-range span {
+    color: var(--text-light);
+}
+
+
+/* ----- Visitor Log Table Card ----- */
+.visitor-log-card {
+    padding: 0;
+    /* Remove padding to let table sit flush */
+}
+
+.visitor-log-card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    padding: 1.5rem 1.5rem 0 1.5rem;
+    /* Add padding back to the title */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
+thead th {
+    background-color: var(--bg-color);
+    color: var(--text-light);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: var(--bg-color);
+}
+
+
+/* Align Actions Header */
+table th:last-child {
+    text-align: center;
+}
+
+.action-icons {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-icons a {
+    color: var(--text-light);
+    transition: color 0.2s ease;
+}
+
+.action-icons a:hover {
+    color: var(--primary-color);
+}
+
+/* Badge Pill Style */
+.badge-pill {
+    background-color: #dbeafe;
+    /* Light blue */
+    color: #1e40af;
+    /* Dark blue text */
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+}

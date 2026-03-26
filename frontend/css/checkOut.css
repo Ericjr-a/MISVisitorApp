@@ -1,0 +1,100 @@
+/* Reusing checkIn.css for general form styling */
+
+/* ----- Main Page Titles ----- */
+.check-out-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.check-out-card {
+    max-width: 1400px; /* Constrain the width of the form, similar to check-in */
+}
+
+/* ----- Search Section Styling ----- */
+.search-section {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem; /* Slightly less padding to visually connect search box and button */
+}
+
+.search-bar {
+    /* Overriding the search-bar from checkIn.css */
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0; /* Remove internal padding */
+    margin-bottom: 1rem;
+}
+
+.search-bar input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    background: transparent;
+}
+
+.select-visitor-btn {
+    align-self: flex-start; /* Aligns button to the left */
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ----- Selected Visitor Info Box ----- */
+.selected-visitor-info {
+    /* Simulating a filled input/section */
+    background-color: var(--bg-color); 
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.selected-visitor-info .visitor-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: block; /* Makes the name take up full width */
+    margin-bottom: 0.5rem;
+}
+
+.selected-visitor-info .visitor-meta {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.selected-visitor-info .visitor-meta i {
+    color: var(--text-light);
+    margin-right: 0.5rem;
+}
+
+/* ----- Departure Section Styling ----- */
+.departure-section {
+    padding-top: 0.5rem;
+}
+
+.form-group.full-width {
+    width: 100%;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background-color: var(--card-bg);
+}
+
+.form-actions {
+    padding-top: 1.5rem;
+}

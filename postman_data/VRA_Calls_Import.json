@@ -1,0 +1,148 @@
+{
+    "info": {
+        "name": "VRA Call Logs Bulk Import",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Add Call Log - Nana Kyerewaa",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"caller_firstname\": \"Nana\",\n    \"caller_lastname\": \"Kyerewaa\",\n    \"host_ID\": 1,\n    \"is_staff\": 1,\n    \"call_duration\": \"00:05:22\",\n    \"purpose\": \"Meeting confirmation\",\n    \"contact\": \"0244112233\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/calls/add",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "calls",
+                        "add"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add Call Log - Efua Glover",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"caller_firstname\": \"Efua\",\n    \"caller_lastname\": \"Glover\",\n    \"host_ID\": 2,\n    \"is_staff\": 1,\n    \"call_duration\": \"00:02:50\",\n    \"purpose\": \"Visitor arrival notice\",\n    \"contact\": \"0244445566\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/calls/add",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "calls",
+                        "add"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add Call Log - Richard Owusu",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"caller_firstname\": \"Richard\",\n    \"caller_lastname\": \"Owusu\",\n    \"host_ID\": 1,\n    \"is_staff\": 0,\n    \"call_duration\": \"00:10:15\",\n    \"purpose\": \"Follow-up on report\",\n    \"contact\": \"0244778899\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/calls/add",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "calls",
+                        "add"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add Call Log - Angela Ofori",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"caller_firstname\": \"Angela\",\n    \"caller_lastname\": \"Ofori\",\n    \"host_ID\": 3,\n    \"is_staff\": 1,\n    \"call_duration\": \"00:07:44\",\n    \"purpose\": \"Confirm delivery\",\n    \"contact\": \"0244001122\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/calls/add",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "calls",
+                        "add"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add Call Log - Samuel Tetteh",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"caller_firstname\": \"Samuel\",\n    \"caller_lastname\": \"Tetteh\",\n    \"host_ID\": 2,\n    \"is_staff\": 0,\n    \"call_duration\": \"00:03:30\",\n    \"purpose\": \"Inquiry\",\n    \"contact\": \"0244332211\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/calls/add",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "calls",
+                        "add"
+                    ]
+                }
+            }
+        }
+    ]
+}

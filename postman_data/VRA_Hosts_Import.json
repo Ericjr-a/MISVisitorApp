@@ -1,0 +1,148 @@
+{
+    "info": {
+        "name": "VRA Hosts Bulk Import",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Add Host - Staff - Kwame Mensah",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"type\": \"staff\",\n    \"staff_id\": \"10001\",\n    \"name\": \"Kwame Mensah\",\n    \"phoneNumber\": \"0244123456\",\n    \"department\": \"IT\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/hosts/add",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "hosts",
+                        "add"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add Host - Staff - Ama Osei",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"type\": \"staff\",\n    \"staff_id\": \"10002\",\n    \"name\": \"Ama Osei\",\n    \"phoneNumber\": \"0200987654\",\n    \"department\": \"HR\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/hosts/add",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "hosts",
+                        "add"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add Host - Staff - Kofi Boateng",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"type\": \"staff\",\n    \"staff_id\": \"10003\",\n    \"name\": \"Kofi Boateng\",\n    \"phoneNumber\": \"0501122334\",\n    \"department\": \"Finance\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/hosts/add",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "hosts",
+                        "add"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add Host - NonStaff - Contractor XYZ",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"type\": \"nonstaff\",\n    \"name\": \"Contractor XYZ\",\n    \"phoneNumber\": \"0277555666\",\n    \"department\": \"Maintenance\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/hosts/add",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "hosts",
+                        "add"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Add Host - NonStaff - Security Chief",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"type\": \"nonstaff\",\n    \"name\": \"Security Chief\",\n    \"phoneNumber\": \"0266444333\",\n    \"department\": \"Security\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:3001/hosts/add",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "3001",
+                    "path": [
+                        "hosts",
+                        "add"
+                    ]
+                }
+            }
+        }
+    ]
+}

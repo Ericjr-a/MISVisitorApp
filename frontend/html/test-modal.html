@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Test</title>
+    <link rel="stylesheet" href="../css/modal.css">
+    <style>
+        body {
+            padding: 50px;
+            font-family: Arial, sans-serif;
+        }
+
+        .test-btn {
+            background: #6366F1;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .test-btn:hover {
+            background: #4f46e5;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Modal Test Page</h1>
+    <button id="openVisitorModal" class="test-btn">Open Visitor Modal</button>
+
+    <!-- Visitor Modal -->
+    <div id="visitorModal" class="modal">
+        <div class="modal-content">
+            <h2>Log New Visitor</h2>
+            <p>This is a test modal</p>
+            <form id="visitorForm">
+                <div class="form-group">
+                    <label for="guest_firstname">Firstname</label>
+                    <input id="guest_firstname" type="text" placeholder="Enter firstname">
+                </div>
+                <div class="btn-row">
+                    <button type="button" id="closeVisitorModal" class="cancel-btn">Close</button>
+                    <button type="submit" class="submit-btn">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/config.js"></script>
+    <script>
+        console.log('Script loaded');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded');
+
+            const openBtn = document.getElementById('openVisitorModal');
+            const closeBtn = document.getElementById('closeVisitorModal');
+            const modal = document.getElementById('visitorModal');
+            const form = document.getElementById('visitorForm');
+
+            console.log('Elements:', {
+                openBtn: !!openBtn,
+                closeBtn: !!closeBtn,
+                modal: !!modal,
+                form: !!form
+            });
+
+            if (openBtn) {
+                openBtn.addEventListener('click', (e) => {
+                    console.log('Open button clicked');
+                    e.preventDefault();
+                    if (modal) {
+                        console.log('Setting modal display to flex');
+                        modal.style.display = 'flex';
+                    }
+                });
+            }
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (e) => {
+                    console.log('Close button clicked');
+                    e.preventDefault();
+                    if (modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            }
+
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    console.log('Form submitted');
+                    alert('Form submitted!');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

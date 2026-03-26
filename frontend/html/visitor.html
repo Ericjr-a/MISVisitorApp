@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Log - VisitorFlow</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/visitor.css">
+    <link rel="stylesheet" href="/css/modal.css">
+    <link rel="stylesheet" href="/css/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/css/flatpickr.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <a href="index.html" class="logo">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <h2>VisiLog</h2>
+                </a>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="index.html"><i class="fa-solid fa-grip"></i><span>Dashboard</span></a></li>
+                        <li><a href="visitor.html" class="active"><i class="fa-solid fa-users"></i><span>Visitor
+                                    Log</span></a></li>
+                        <li><a href="call-log.html"><i class="fa-solid fa-phone"></i><span>Call Log</span></a></li>
+                        <li><a href="checkIn.html"><i
+                                    class="fa-solid fa-arrow-right-to-bracket"></i><span>Check-In</span></a></li>
+                        <li><a href="checkOut.html"><i
+                                    class="fa-solid fa-arrow-right-from-bracket"></i><span>Check-Out</span></a></li>
+                        <li><a href="phonebook.html"><i class="fa-solid fa-address-book"></i><span>Phonebook</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <nav class="sidebar-bottom-nav">
+                <ul>
+                    <li><a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
+                    <li><a href="report.html"><i class="fa-solid fa-file-lines"></i><span>Report</span></a></li>
+                    </li><a href="#" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i><span>Log
+                            Out</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-search">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="globalSearch" placeholder="Search visitor names...">
+                </div>
+                <div class="header-actions">
+                    <div class="profile-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </div>
+            </header>
+
+            <section class="visitor-log-container">
+                <div class="log-header">
+                    <div class="log-actions">
+                        <button id="openVisitorModal" class="btn-primary"><i class="fa-solid fa-plus"></i> Add New
+                            Visitor</button>
+                        <button class="btn-secondary"><i class="fa-solid fa-download"></i> Export Logs</button>
+                    </div>
+                    <div class="date-range">
+                        <i class="fa-solid fa-calendar-day"></i>
+                        <input type="text" class="form-control flatpickr-input" id="date-range-picker"
+                            placeholder="Select Date Range">
+                    </div>
+                </div>
+
+                <div class="card visitor-log-card">
+                    <h2>Visitor Log</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Visitor Name</th>
+                                <th>Badge Number</th>
+                                <th>Check-in Time</th>
+                                <th>Check-out Time</th>
+                                <th>Visit Purpose</th>
+                                <th>Person Visited</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Rows populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <footer class="main-footer">
+            <div class="footer-links">
+                <a href="#">Quick Links</a>
+                <a href="#">Support</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- New Visitor Modal -->
+    <div id="visitorModal" class="modal">
+        <div class="modal-content">
+            <h2>Log New Visitor</h2>
+            <p>Fields with * are mandatory and badge number is auto generated</p>
+
+            <form id="visitorForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="guest_firstname">Firstname<span>*</span></label>
+                        <input id="guest_firstname" name="guest_firstname" type="text"
+                            placeholder="Enter visitor's firstname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guest_lastname">Lastname<span>*</span></label>
+                        <input id="guest_lastname" name="guest_lastname" type="text"
+                            placeholder="Enter visitor's lastname" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="guest_phonenumber">Phone Number</label>
+                    <input id="guest_phonenumber" name="guest_phonenumber" type="text"
+                        placeholder="Enter visitor's phone number">
+                </div>
+
+                <div class="form-group">
+                    <label for="host_name">Person Visited<span>*</span></label>
+                    <select id="host_name" name="host_name" required>
+                        <option value="">Select person visited</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="visit_purpose">Purpose of visit<span>*</span></label>
+                    <input id="visit_purpose" name="visit_purpose" type="text" placeholder="Enter purpose of visit"
+                        required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="badge_number">Badge Number <span class="readonly">Read-Only</span></label>
+                        <input id="badge_number" name="badge_number" type="text" value="V007" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="arrival_time">Arrival Time<span>*</span></label>
+                        <input id="arrival_time" name="arrival_time" type="time" required>
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button type="button" id="closeVisitorModal" class="cancel-btn">Cancel</button>
+                    <button type="submit" class="submit-btn">Log and Check-In Visitor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="../js/flatpickr.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof flatpickr !== 'function') {
+                console.error('Flatpickr library not loaded! Type:', typeof flatpickr);
+                alert('CRITICAL: "flatpickr.min.js" failed to load.\n\n1. Check if "frontend/js/flatpickr.min.js" exists on the server.\n2. Clear browser cache.');
+                return;
+            }
+            const dateInput = document.getElementById("date-range-picker");
+            if (!dateInput) {
+                console.error('Date input element not found!');
+                return;
+            }
+            flatpickr(dateInput, {
+                mode: "range",
+                dateFormat: "d/m/Y",
+                onChange: function (selectedDates, dateStr, instance) {
+                    console.log('Date selected:', dateStr);
+                    // Future: Trigger filtering logic here
+                }
+            });
+            console.log('Flatpickr initialized successfully');
+        });
+    </script>
+    <script src="../js/config.js"></script>
+    <script src="../js/auth-check.js"></script>
+    <script src="../js/V.Js"></script>
+    <script src="../js/visitor.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/logout.js"></script>
+</body>
+
+</html>
