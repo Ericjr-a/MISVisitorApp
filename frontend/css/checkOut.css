@@ -98,3 +98,61 @@
 .form-actions {
     padding-top: 1.5rem;
 }
+
+/* Visitor Autocomplete Dropdown */
+.visitor-autocomplete-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+.visitor-autocomplete-dropdown .dropdown-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.visitor-autocomplete-dropdown .dropdown-item:hover {
+    background: #f8f9fa;
+}
+
+.visitor-autocomplete-dropdown .dropdown-item:last-child {
+    border-bottom: none;
+}
+
+/* Search bar wrapper */
+.search-bar {
+    position: relative;
+    width: 100%;
+}
+
+/* Selected visitor highlight */
+.selected-visitor-info {
+    transition: all 0.3s;
+}
+
+.selected-visitor-info.highlight {
+    background-color: #e8f4ff;
+}
+
+/* Input focus */
+#visitorSearchCheckout {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.2s;
+}
+
+#visitorSearchCheckout:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
