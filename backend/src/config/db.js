@@ -1,20 +1,37 @@
 import mysql from "mysql2";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const db = mysql.createConnection({
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-  socketPath: "/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock",
+// Load .env from backend folder
+dotenv.config({ path: path.join(__dirname, '../../.env') });
+
+// Create connection pool for Windows (using TCP instead of socket)
+const db = mysql.createPool({
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASS || '',
+  database: process.env.DB_NAME || 'Visilog',
+  port: parseInt(process.env.DB_PORT) || 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
-db.connect((err) => {
+// Test connection
+db.getConnection((err, connection) => {
   if (err) {
     console.error("Database connection failed:", err.message);
+    console.error("Please check:");
+    console.error("1. XAMPP MySQL is running");
+    console.error("2. Database credentials in .env file");
+    console.error("3. Database 'Visilog' exists");
   } else {
-    console.log("Connected to database");
+    console.log("✅ Database connected successfully!");
+    connection.release();
   }
 });
 
